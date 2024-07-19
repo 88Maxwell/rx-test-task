@@ -1,16 +1,16 @@
 import { createRoute } from "@tanstack/react-router";
 import TodoListPage from "../../pages/TodoListPage";
 import TodoPage from "../../pages/TodoPage";
-import { rootRoute } from "app/rootRoute";
+import { authorizedLayoutRoute } from "core/user/userRoutes";
 
 export const todoListRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => authorizedLayoutRoute,
   path: "/",
   component: TodoListPage,
 });
 
 export const todoRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => authorizedLayoutRoute,
   path: "/todo/:id",
   component: TodoPage,
 });
