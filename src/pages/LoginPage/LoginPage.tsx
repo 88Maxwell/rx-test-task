@@ -1,20 +1,35 @@
 import { useForm } from "react-hook-form";
 import { LoginFormValues, LoginPageProps } from "./LoginPageTypes";
+import { Button, Heading } from "@radix-ui/themes";
+import { Form } from "@radix-ui/react-form";
+import { InputFormField } from "shared/components/InputFormField";
 
 export const LoginPage = ({ userService }: LoginPageProps) => {
   const { register, handleSubmit } = useForm<LoginFormValues>();
 
   return (
-    <form
-      className="flex flex-col gap-2 p-20 rounded-md bg-orange-600"
+    <Form
+      className="flex flex-col p-10 rounded-md bg-orange-800 min-w-[50%]"
       onSubmit={handleSubmit(userService.login)}
     >
-      <h1 className="text-3xl mb-4">Login page</h1>
-      <input className="p-2 rounded-md" {...register("email")} placeholder="email" />
-      <input className="p-2 rounded-md" {...register("password")} placeholder="password" />
-      <button className="mt-2 bg-white p-2  rounded-md" type="submit">
+      <Heading className="text-3xl mb-8">Login page</Heading>
+      <InputFormField
+        type="email"
+        className="mb-4"
+        {...register("email")}
+        placeholder="email"
+        label="Email"
+      />
+      <InputFormField
+        type="password"
+        className="mb-4"
+        {...register("password")}
+        placeholder="password"
+        label="Password"
+      />
+      <Button className="mt-2" type="submit">
         Login
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
