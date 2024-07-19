@@ -1,7 +1,8 @@
 import { BehaviorSubject } from "rxjs";
 import { inject, injectable, singleton } from "tsyringe";
-import { UserEntity } from "../UserEntity";
+import { UserDTO, UserEntity } from "../UserEntity";
 import UserService from "../UserService";
+import { getAuthTokenData, parseAuthToken, setAuthToken } from "shared/utils/authUtils";
 
 @singleton()
 @injectable()
@@ -18,15 +19,35 @@ export class UserAuthorizationStore {
   }
 
   getAuthorizedUser() {
-    this.user$$.getValue();
+    const user = this.user$$.getValue();
+    if (user) return user;
+    const tokenData = getAuthTokenData();
+    if (!tokenData) return null;
+    const currentUser = this.updateUser(tokenData.user);
+    return currentUser;
+  }
+
+  private updateUser(user: UserDTO) {
+    const currentUser = new UserEntity(user);
+    this.user$$.next(currentUser);
+    return currentUser;
+  }
+
+  logout() {
+    setAuthToken("");
+    this.user$$.next(null);
   }
 
   login(userData: Parameters<UserService["login"]>[0]) {
-    this.userService.login(userData).subscribe({
-      next: (user) => {
-        const currentUser = new UserEntity(user);
-        this.user$$.next(currentUser);
-      },
-    });
+    return this.userService
+      .login(userData)
+      .pipe()
+      .subscribe({
+        next: ({ token }) => {
+          setAuthToken(token);
+          const tokenData = parseAuthToken(token);
+          this.updateUser(tokenData.user);
+        },
+      });
   }
 }
