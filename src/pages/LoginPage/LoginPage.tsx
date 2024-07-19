@@ -9,7 +9,7 @@ export const LoginPage = ({ userService }: LoginPageProps) => {
 
   return (
     <Form
-      className="flex flex-col p-10 rounded-md bg-orange-800 min-w-[50%]"
+      className="flex flex-col p-10 rounded-md min-w-[50%] bg-blue-400/10"
       onSubmit={handleSubmit(userService.login)}
     >
       <Heading className="text-3xl mb-8">Login page</Heading>
