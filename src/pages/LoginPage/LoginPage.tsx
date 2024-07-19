@@ -1,14 +1,22 @@
 import { useForm } from "react-hook-form";
 import { LoginFormValues, LoginPageProps } from "./LoginPageTypes";
 
-export const LoginPage = ({ onLogin }: LoginPageProps) => {
+export const LoginPage = ({
+  onLogin = (...args) => {
+    console.log({ args });
+  },
+}: LoginPageProps) => {
   const { register, handleSubmit } = useForm<LoginFormValues>();
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onLogin)}>
-      <input {...register("login")} />
-      <input {...register("password")} />
-      <button className="bg-primary" type="submit">
+    <form
+      className="flex flex-col gap-2 p-20 rounded-md bg-orange-600"
+      onSubmit={handleSubmit(onLogin)}
+    >
+      <h1 className="text-3xl mb-4">Login page</h1>
+      <input className="p-2 rounded-md" {...register("email")} placeholder="email" />
+      <input className="p-2 rounded-md" {...register("password")} placeholder="password" />
+      <button className="mt-2 bg-white p-2  rounded-md" type="submit">
         Login
       </button>
     </form>
