@@ -24,7 +24,8 @@
     "noFallthroughCasesInSwitch": true,
     // tsyringe
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "baseUrl": "src"
   },
   "include": ["src"]
 }
