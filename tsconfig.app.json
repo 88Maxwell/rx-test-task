@@ -22,10 +22,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    // tsyringe
+
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
     "baseUrl": "src"
   },
   "include": ["src"]

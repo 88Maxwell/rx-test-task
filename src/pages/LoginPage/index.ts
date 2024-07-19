@@ -1,7 +1,7 @@
 import { injectService } from "shared/injectService";
 import { LoginPage } from "./LoginPage";
-import UserService from "core/user/UserService";
+import { UserAuthorizationStore } from "core/user/stores/UserAuthorizationStore";
 
 export { LoginPage };
 
-export default injectService("userService", UserService)(LoginPage);
+export default injectService("userAuthorizationStore", UserAuthorizationStore)(LoginPage);

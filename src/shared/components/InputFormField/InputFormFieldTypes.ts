@@ -4,5 +4,5 @@ import { ReactNode } from "@tanstack/react-router";
 export interface InputFormFieldProps extends FormFieldProps {
   placeholder?: string;
   label: ReactNode;
-  type: React.ComponentProps<"input">["type"];
+  type?: React.ComponentProps<"input">["type"];
 }

@@ -1,4 +1,4 @@
-import UserService from "core/user/UserService";
+import { UserAuthorizationStore } from "core/user/stores/UserAuthorizationStore";
 
 export type LoginFormValues = {
   email: string;
@@ -6,5 +6,5 @@ export type LoginFormValues = {
 };
 
 export type LoginPageProps = {
-  userService: UserService;
+  userAuthorizationStore: UserAuthorizationStore;
 };

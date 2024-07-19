@@ -1,9 +1,10 @@
 import { Container, Heading, Text } from "@radix-ui/themes";
-import { UserAuthorizationStore } from "core/user/stores/CurrentUserStore";
+import { UserAuthorizationStore } from "core/user/stores/UserAuthorizationStore";
 import { useObservableState } from "observable-hooks";
 import { useService } from "shared/useService";
 
 export function HomePage() {
+  // TODO: move logic to HOC
   const userAuthorizationStore = useService(UserAuthorizationStore);
   const [authorizedUser] = useObservableState(userAuthorizationStore.getAuthorizedUser$);
 
