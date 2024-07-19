@@ -1,4 +1,4 @@
-import { createRootRoute } from "@tanstack/react-router";
+import { createRootRouteWithContext } from "@tanstack/react-router";
 import {
   authorizedLayoutRoute,
   unauthorizedLayoutRoute,
@@ -6,7 +6,10 @@ import {
   userHomeRoute,
 } from "core/user/userRoutes";
 
-export const rootRoute = createRootRoute();
+export type RootRouteContext = {
+  isUserAuthorized: boolean;
+};
+export const rootRoute = createRootRouteWithContext<RootRouteContext>()();
 
 export const routeTree = rootRoute.addChildren([
   unauthorizedLayoutRoute.addChildren([userLoginRoute]),

@@ -1,25 +1,6 @@
-// import { factory, primaryKey } from "@mswjs/data";
 import { faker } from "@faker-js/faker";
 import { UserLoginReqData, UserLoginResData } from "core/user/UserService/UserServiceTypes";
 import { http, HttpResponse } from "msw";
-
-const sign = (data: object) => {
-  const header = {
-    alg: "randomJwtHeaderAlgorythm", // abstracted here
-    typ: "JWT",
-  };
-  const payload = {
-    ...data,
-    iat: faker.date.anytime().valueOf(),
-    exp: faker.date.anytime().valueOf(),
-  };
-
-  const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64url");
-  const encodedPayload = Buffer.from(JSON.stringify(payload)).toString("base64url");
-  const signature = faker.random.alphaNumeric(64);
-
-  return `${encodedHeader}.${encodedPayload}.${signature}`;
-};
 
 export const mockUserServiceHandlers = [
   http.post<never, UserLoginReqData, UserLoginResData>("login", async ({ request }) => {
@@ -31,8 +12,11 @@ export const mockUserServiceHandlers = [
       lastName: faker.person.lastName(),
       email: data.email,
     };
-    const token = sign({ user, iat: Math.floor(Date.now() / 1000) - 30 });
 
-    return HttpResponse.json({ token });
+    return HttpResponse.json({
+      user,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlciI6eyJpZCI6ImZha2VfaWQiLCJmaXJzdE5hbWUiOiJmYWtlX2ZpcnN0TmFtZSIsImxhc3ROYW1lIjoiZmFrZV9sYXN0TmFtZSIsImVtYWlsIjoiZmFrZV9lbWFpbCIsImNyZWF0ZWRBdCI6ImZha2VfY3JlYXRlZEF0In0sImlhdCI6MTUxNjIzOTAyMn0.mc2PE2SGMoNHPtLxMQYEmtopT-VO-S_Mcd4AgDpDdLI",
+    });
   }),
 ];

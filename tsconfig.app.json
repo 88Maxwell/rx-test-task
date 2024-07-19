@@ -27,5 +27,5 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src", "mockServiceWorker.js"]
 }

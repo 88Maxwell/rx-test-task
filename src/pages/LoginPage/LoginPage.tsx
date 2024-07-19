@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { LoginFormValues, LoginPageProps } from "./LoginPageTypes";
-import { Button, Heading } from "@radix-ui/themes";
 import { InputFormField } from "shared/components/InputFormField";
 
 export const LoginPage = ({ userAuthorizationStore }: LoginPageProps) => {
@@ -11,7 +10,7 @@ export const LoginPage = ({ userAuthorizationStore }: LoginPageProps) => {
       className="flex flex-col p-10 rounded-md min-w-[50%] bg-blue-400/10"
       onSubmit={handleSubmit(userAuthorizationStore.login)}
     >
-      <Heading className="text-3xl mb-8">Login page</Heading>
+      <h1 className="text-3xl mb-8">Login page</h1>
       <InputFormField
         type="email"
         className="mb-4"
@@ -25,9 +24,9 @@ export const LoginPage = ({ userAuthorizationStore }: LoginPageProps) => {
         placeholder="password"
         label="Password"
       />
-      <Button className="mt-2" type="submit">
+      <button className="p-4 mt-2 bg-blue-400 rounded-md" type="submit">
         Login
-      </Button>
+      </button>
     </form>
   );
 };

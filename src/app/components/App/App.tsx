@@ -1,11 +1,14 @@
-import { Theme } from "@radix-ui/themes";
 import { RouterProvider } from "@tanstack/react-router";
 import { router } from "app/router";
+import { UserAuthorizationStore } from "core/user/stores/UserAuthorizationStore";
+import { useObservableState } from "observable-hooks";
+import { useService } from "shared/useService";
 
 export function App() {
-  return (
-    <Theme className="h-full" appearance="dark">
-      <RouterProvider router={router} />
-    </Theme>
-  );
+  const userAuthorizationStore = useService(UserAuthorizationStore);
+  const [isUserAuthorized] = useObservableState(userAuthorizationStore.getIsUserAuthorized$, null);
+
+  if (isUserAuthorized === null) return null;
+
+  return <RouterProvider router={router} context={{ isUserAuthorized }} />;
 }

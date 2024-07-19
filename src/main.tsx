@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./input.css";
-import "@radix-ui/themes/styles.css";
 import "reflect-metadata";
 import { Entrypoint } from "./app/components/Entrypoint";
 import { config } from "app/config";

@@ -1,4 +1,5 @@
 import { UserDTO } from "core/user/UserEntity";
+import { jwtDecode } from "jwt-decode";
 import { LOCAL_STORAGE_AUTH_TOKEN_KEY } from "shared/sharedConstants";
 
 export const setAuthToken = (token: string) => {
@@ -7,15 +8,19 @@ export const setAuthToken = (token: string) => {
 
 type AuthTokenData = {
   user: UserDTO;
+  alg: "HS256";
+  typ: "JWT";
 };
 
 export const parseAuthToken = (token: string) => {
-  const tokenData: AuthTokenData = JSON.parse(token);
-  return tokenData;
+  const tokenJSON = jwtDecode<AuthTokenData>(token);
+  return tokenJSON;
 };
 
 export const getAuthTokenData = () => {
   const token = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY);
   if (!token) return null;
-  return parseAuthToken(token);
+  const data = parseAuthToken(token);
+  console.log({ token, data });
+  return data;
 };
