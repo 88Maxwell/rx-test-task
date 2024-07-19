@@ -1,14 +1,13 @@
-import { Flex, Heading } from "@radix-ui/themes";
 import { Outlet } from "@tanstack/react-router";
 import AuthorizedGuard from "core/user/guards/AuthorizedGuard";
 
 export const UnauthorizedLayout = () => {
   return (
     <AuthorizedGuard>
-      <Flex justify={"center"} align={"center"}>
-        <Heading>UnauthorizedLayout</Heading>
+      <div className="flex flex-col justify-center items-center h-full">
+        <h1 className="text-lg">UnauthorizedLayout</h1>
         <Outlet />
-      </Flex>
+      </div>
     </AuthorizedGuard>
   );
 };

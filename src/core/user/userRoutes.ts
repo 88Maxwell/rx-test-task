@@ -22,3 +22,9 @@ export const userLoginRoute = createRoute({
   path: "/login",
   component: LoginPage,
 });
+
+export const userHomeRoute = createRoute({
+  getParentRoute: () => authorizedLayoutRoute,
+  path: "/",
+  component: LoginPage,
+});

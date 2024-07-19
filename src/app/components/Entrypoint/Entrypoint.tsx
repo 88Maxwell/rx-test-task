@@ -1,10 +1,8 @@
-import { Theme } from "@radix-ui/themes";
+import { bootstrap } from "app/bootstrap";
 import { App } from "../App";
 
+bootstrap();
+
 export function Entrypoint() {
-  return (
-    <Theme>
-      <App />
-    </Theme>
-  );
+  return <App />;
 }
