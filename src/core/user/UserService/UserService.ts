@@ -7,7 +7,11 @@ import { UserDTO } from "../UserEntity";
 @singleton()
 @injectable()
 export class UserService {
-  constructor(@inject(HTTPClient) private httpClient: HTTPClient) {}
+  constructor(@inject(HTTPClient) private httpClient: HTTPClient) {
+    this.httpClient = httpClient;
+
+    this.login = this.login.bind(this);
+  }
 
   login(data: UserLoginReqData) {
     return from(this.httpClient.post<UserDTO>("login", { data })).pipe(share());

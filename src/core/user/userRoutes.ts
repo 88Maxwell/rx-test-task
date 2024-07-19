@@ -4,6 +4,7 @@ import { rootRoute } from "app/rootRoute";
 import LoginPage from "../../pages/LoginPage";
 import AuthorizedLayout from "core/user/layouts/AuthorizedLayout";
 import UnauthorizedLayout from "core/user/layouts/UnauthorizedLayout";
+import HomePage from "pages/HomePage";
 
 export const authorizedLayoutRoute = createRoute({
   id: "authorizedLayoutRoute",
@@ -26,5 +27,5 @@ export const userLoginRoute = createRoute({
 export const userHomeRoute = createRoute({
   getParentRoute: () => authorizedLayoutRoute,
   path: "/",
-  component: LoginPage,
+  component: HomePage,
 });
