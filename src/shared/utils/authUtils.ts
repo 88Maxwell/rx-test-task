@@ -19,8 +19,10 @@ export const parseAuthToken = (token: string) => {
 
 export const getAuthTokenData = () => {
   const token = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY);
+
   if (!token) return null;
+
   const data = parseAuthToken(token);
-  console.log({ token, data });
+
   return data;
 };
